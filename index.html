@@ -150,6 +150,28 @@
             color: var(--color-text-secondary);
             font-size: 0.85rem;
         }
+        
+        /* 全域 CTA 按鈕樣式 (供 Hero/About 區共用) */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: var(--color-text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--color-primary-light);
+            text-decoration: none;
+        }
+        
+        .cta-group {
+            margin-top: 2rem;
+        }
+
 
         /* CSS:BASE-END */
 
@@ -180,27 +202,44 @@
             color: var(--color-text-secondary);
             margin-bottom: 2rem;
         }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--color-primary);
-            color: var(--color-text-primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            font-weight: bold;
-            margin: 0 0.5rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background-color: var(--color-primary-light);
-            text-decoration: none;
-        }
         /* CSS:HERO-END */
 
         /* CSS:ABOUT-START */
         .section-about {
             background-color: var(--color-surface);
+            text-align: left; /* 覆蓋 section-title 的置中 */
+        }
+
+        .about-content-wrapper {
+            margin-bottom: 2rem; /* 手機版內容與圖片間距 */
+        }
+
+        .about-image {
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 2rem; /* 圖片在文字下方時的間距 */
+        }
+
+        .about-features-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .about-features-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-text-primary);
+        }
+
+        .about-features-list li::before {
+            content: '✓'; /* 簡單的符號代替圖標 */
+            color: var(--color-primary-light);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
         }
         /* CSS:ABOUT-END */
 
@@ -249,7 +288,7 @@
                 padding-bottom: 6rem;
             }
 
-            /* 範例：Hero 區左右排版 (若未來需要) */
+            /* Hero 區左右排版 (沿用 Phase 1 範例) */
             .section-hero .container {
                 display: flex;
                 align-items: center;
@@ -267,6 +306,27 @@
 
             .hero-image {
                 margin: 0;
+            }
+
+            /* About 區：左右雙欄排版 (新增) */
+            .section-about .container {
+                display: flex;
+                flex-direction: row; /* 文字左，圖片右 */
+                align-items: flex-start;
+                gap: 4rem;
+            }
+            
+            .about-content-wrapper {
+                flex: 3; /* 文字佔更多空間 */
+                margin-bottom: 0;
+            }
+
+            .about-image-wrapper {
+                flex: 2; /* 圖片佔較少空間 */
+            }
+
+            .about-image {
+                margin-top: 0; /* 移除手機版上間距 */
             }
         }
 
@@ -321,10 +381,35 @@
             </section>
             <section id="about" class="section section-about" aria-labelledby="about-heading">
                 <div class="container">
-                    <h2 id="about-heading" class="section-title">關於我（之後會用 Section SDD 替換）</h2>
-                    <p>這裡目前是 About 區的**占位內容**。這個區塊未來會用來展示我的經歷、職涯故事、以及專業特質。</p>
-                    <img src="https://source.unsplash.com/800x600/?office,desk,coding" loading="lazy" alt="整潔的辦公桌與筆記型電腦，象徵工作環境與專業態度">
-                    <p>之後會用 Section SDD 的 Prompt 產生新的 section，請把新的 section 程式碼**整段貼在這兩個註解中間**，完全取代現在這一區。</p>
+                    <div class="about-content-wrapper">
+                        <h2 id="about-heading" class="section-title">關於我</h2>
+                        
+                        <p>
+                            我目前以**前端工程師**身份活躍於業界，專注於利用 **Vue.js/React** 打造高互動性且易於維護的產品介面。除了日常開發，我也喜歡透過文章和教學，將複雜的技術概念**系統化地分享給他人**，提升團隊或社群的技術水準。
+                        </p>
+                        
+                        <p>
+                            在我的工作流程中，我極度重視**溝通的清晰度與透明度**。我相信好的程式碼來自於好的規格與理解，因此我總是努力確保產品需求、設計稿和最終實作之間達到高度一致。我追求的不只是功能實現，更是**可讀性高且具有長期價值**的程式碼。
+                        </p>
+                        
+                        <ul class="about-features-list">
+                            <li>**專案強項一：高效能 RWD 實作** — 確保網站在任何裝置上皆能提供流暢且一致的體驗。</li>
+                            <li>**專案強項二：元件化與模組化** — 透過結構化的程式碼，大幅降低專案維護成本。</li>
+                            <li>**專案強項三：技術橋樑角色** — 擅長將設計師與後端的需求，轉化為具體且可行的前端方案。</li>
+                        </ul>
+
+                        <div class="cta-group">
+                            <a href="#projects" class="cta-button">查看作品集</a>
+                            <a href="#contact" class="cta-button">聯絡我</a>
+                        </div>
+                    </div>
+
+                    <div class="about-image-wrapper">
+                        <img class="about-image" src="https://source.unsplash.com/800x600/?coding,engineer,laptop" loading="lazy" alt="一位工程師在筆記型電腦前專注寫程式的示意照片，代表專業與技術">
+                    </div>
+                    
+                    <p class="section-note">
+                        </p>
                 </div>
             </section>
             <section id="skills" class="section section-skills" aria-labelledby="skills-heading">
